@@ -13,8 +13,10 @@ MODEL_ID = "anthropic.claude-3-haiku-20240307-v1:0"
 IDENTITY_POOL_ID = "us-east-1:7771aae7-be2c-4496-a582-615af64292cf"
 USER_POOL_ID = "us-east-1_koPKi1lPU"
 APP_CLIENT_ID = "3h7m15971bnfah362dldub1u2p"
-USERNAME = ""
-PASSWORD = ""
+USERNAME = "" # Replace with your username
+PASSWORD = "" # Replace with your password
+# Register your account:
+# https://us-east-1kopki1lpu.auth.us-east-1.amazoncognito.com/login?client_id=3h7m15971bnfah362dldub1u2p&response_type=code&scope=aws.cognito.signin.user.admin+email+openid&redirect_uri=https%3A%2F%2Fd84l1y8p4kdic.cloudfront.net
 
 
 # === Helper: Get AWS Credentials === #
