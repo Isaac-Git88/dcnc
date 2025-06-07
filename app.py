@@ -14,8 +14,8 @@ MODEL_ID = "anthropic.claude-3-haiku-20240307-v1:0"
 IDENTITY_POOL_ID = "us-east-1:7771aae7-be2c-4496-a582-615af64292cf"
 USER_POOL_ID = "us-east-1_koPKi1lPU"
 APP_CLIENT_ID = "3h7m15971bnfah362dldub1u2p"
-USERNAME = "s3860650@student.rmit.edu.au" # Replace with your username
-PASSWORD = "Dcnc123!"    # Replace with your password
+USERNAME = "" # Replace with your username
+PASSWORD = "!"    # Replace with your password
 
 
 # === Helper: Get AWS Credentials === #
