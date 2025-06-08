@@ -9,8 +9,8 @@ MODEL_ID = "anthropic.claude-3-haiku-20240307-v1:0"
 IDENTITY_POOL_ID = "us-east-1:7771aae7-be2c-4496-a582-615af64292cf"
 USER_POOL_ID = "us-east-1_koPKi1lPU"
 APP_CLIENT_ID = "3h7m15971bnfah362dldub1u2p"
-USERNAME = "s3860650@student.rmit.edu.au"
-PASSWORD = "Dcnc123!"
+USERNAME = ""
+PASSWORD = ""
 
 st.set_page_config(page_title="Ask AI About RMIT", layout="wide")
 
@@ -106,12 +106,17 @@ Use only current and accurate information.
 with st.sidebar:
   st.header("💬 RMIT AI Chat")
   if st.button("🆕 Start New Conversation"):
-    new_index = len(st.session_state.conversations)
-    st.session_state.conversations.append({
-      "title": f"Conversation {new_index + 1}",
-      "history": []
-    })
-    st.session_state.current_convo_index = new_index
+    if (
+      st.session_state.current_convo_index is None
+      or len(st.session_state.conversations[st.session_state.current_convo_index]["history"]) > 0
+    ):
+      new_index = len(st.session_state.conversations)
+      st.session_state.conversations.append({
+        "title": f"Conversation {new_index + 1}",
+        "history": []
+      })
+      st.session_state.current_convo_index = new_index
+
   st.subheader("Chat History")
   for i, convo in enumerate(st.session_state.conversations):
     if st.button(convo["title"], key=f"load_{i}"):
@@ -167,6 +172,8 @@ if user_input:
 
         if len(convo["history"]) == 1:
           convo["title"] = user_input.capitalize()
+
+        st.experimental_rerun()
 
       except Exception as e:
         st.error(f"Error: {str(e)}")
