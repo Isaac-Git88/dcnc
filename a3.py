@@ -24,17 +24,18 @@ if "current_convo_index" not in st.session_state:
   st.session_state.current_convo_index = None
 
 # === Helpers ===
-def fetch_Data(db_path="a3.db"):
+def fetch_Data(db_path="a3.db"): # Change to your database name
   try:
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
-    cursor.execute("SELECT name, course_coordinator, credits FROM Course;")
+    cursor.execute("SELECT name, course_coordinator, credits FROM Course;") # Adjust query as needed
     rows = cursor.fetchall()
     conn.close()
     return rows
   except sqlite3.Error as e:
     return [f"SQLite error: {e}"]
 
+# Change this function based on your database schema
 def format_courses_for_prompt(courses):
   if not courses or isinstance(courses[0], str):
     return "No course data available or error reading database."
@@ -159,7 +160,7 @@ if user_input:
   with st.chat_message("assistant"):
     with st.spinner("Thinking..."):
       try:
-        course_data = fetch_Data("/Users/isaac/Downloads/a3.db")
+        course_data = fetch_Data("/Users/isaac/Downloads/a3.db") # Change to your database path
         course_info = format_courses_for_prompt(course_data)
         full_prompt = f"""{context}\n\n{course_info}\n\nUser Question:\n{user_input}"""
         answer = invoke_bedrock(full_prompt).strip()
