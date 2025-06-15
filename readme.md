@@ -50,3 +50,17 @@ Follow the steps below to set up and run this project:
    ```bash
    streamlit run chatbot.py
    ```
+
+---
+
+## ❓ Troubleshooting
+
+| Issue                          | Solution                                                      |
+| ------------------------------ | ------------------------------------------------------------- |
+| Authorisation Issue            | Exit out IDE and reload                                       |
+| Cannot install packages        | Ensure you have Python 3.x and pip is working                 |
+| No browser opens               | Visit [http://localhost:8501](http://localhost:8501) manually |
+| Data not loaded properly       | Check file formats and filenames                              |
+| Incorrect username or password | Make sure to follow the format in .env file without ""        |
+
+---

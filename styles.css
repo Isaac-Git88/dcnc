@@ -31,7 +31,6 @@
   position: fixed;
   bottom: 0;
   left: 17rem;
-  /* width of Streamlit sidebar */
   width: calc(100% - 17rem);
   background-color: white;
   padding: 1rem;

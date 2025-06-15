@@ -130,77 +130,6 @@ def execute_query(conn, query):
     except Exception as e:
         return f"SQL Error: {str(e)}"
 
-# def get_relevant_data_context(conn, user_question):
-    """Get relevant data from database based on user question"""
-    try:
-        context_data = []
-
-        # Keywords to identify what type of information is needed
-        question_lower = user_question.lower()
-
-        # Course-related queries
-        if any(word in question_lower for word in ['course', 'subject', 'class', 'credit']):
-            courses_df = execute_query(conn, """
-                SELECT c.course_name, c.credit_point, c.description,
-                       cc.coordinator_name, cc.coordinator_email, cc.coordinator_phone
-                FROM courses c
-                LEFT JOIN course_coordinator cc ON c.coordinator_name = cc.coordinator_name
-                LIMIT 50
-            """)
-            if isinstance(courses_df, pd.DataFrame) and not courses_df.empty:
-                context_data.append("Available Courses:")
-                for _, row in courses_df.iterrows():
-                    context_data.append(f"- {row['course_name']} ({row['credit_point']} credits)")
-                    if pd.notna(row['description']):
-                        context_data.append(f"  Description: {row['description']}")
-                    if pd.notna(row['coordinator_name']):
-                        context_data.append(f"  Coordinator: {row['coordinator_name']} ({row['coordinator_email']})")
-
-        # Degree-related queries
-        if any(word in question_lower for word in ['degree', 'program', 'bachelor', 'master', 'diploma']):
-            degrees_df = execute_query(conn, """
-                SELECT degree_name, level_of_study, student_type, learning_mode,
-                       entry_score, duration, fees, next_intake, location
-                FROM degree
-                LIMIT 30
-            """)
-            if isinstance(degrees_df, pd.DataFrame) and not degrees_df.empty:
-                context_data.append("\nAvailable Degrees:")
-                for _, row in degrees_df.iterrows():
-                    context_data.append(f"- {row['degree_name']} ({row['level_of_study']})")
-                    context_data.append(f"  Student Type: {row['student_type']}, Mode: {row['learning_mode']}")
-                    if pd.notna(row['fees']):
-                        context_data.append(f"  Fees: {row['fees']}")
-                    if pd.notna(row['duration']):
-                        context_data.append(f"  Duration: {row['duration']}")
-                    if pd.notna(row['entry_score']):
-                        context_data.append(f"  Entry Score: {row['entry_score']}")
-
-        # Coordinator-related queries
-        if any(word in question_lower for word in ['coordinator', 'contact', 'teacher', 'instructor']):
-            coordinators_df = execute_query(conn, """
-                SELECT coordinator_name, coordinator_email, coordinator_phone,
-                       coordinator_location, coordinator_availability
-                FROM course_coordinator
-                LIMIT 20
-            """)
-            if isinstance(coordinators_df, pd.DataFrame) and not coordinators_df.empty:
-                context_data.append("\nCourse Coordinators:")
-                for _, row in coordinators_df.iterrows():
-                    context_data.append(f"- {row['coordinator_name']}")
-                    context_data.append(f"  Email: {row['coordinator_email']}")
-                    if pd.notna(row['coordinator_phone']):
-                        context_data.append(f"  Phone: {row['coordinator_phone']}")
-                    if pd.notna(row['coordinator_location']):
-                        context_data.append(f"  Location: {row['coordinator_location']}")
-                    if pd.notna(row['coordinator_availability']):
-                        context_data.append(f"  Availability: {row['coordinator_availability']}")
-
-        return "\n".join(context_data) if context_data else "No specific data found for this query."
-
-    except Exception as e:
-        return f"Error retrieving data: {str(e)}"
-
 def get_relevant_data_context(conn, user_question):
     """Generate and run SQL using LangChain and Claude."""
     try:
@@ -357,9 +286,6 @@ if user_input:
                     "answer": answer
                 })
 
-                # Update conversation title
-                # if len(convo["history"]) == 1:
-                #     convo["title"] = user_input[:50] + "..." if len(user_input) > 50 else user_input
                 if len(convo["history"]) == 1:
                   convo["title"] = user_input.capitalize()
 
