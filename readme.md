@@ -10,7 +10,7 @@ Follow the steps below to set up and run this project:
    PASSWORD=your_password
    ```
 
-2. **Updata the Database Path**
+2. **Update the Database Path**
    In chatbot.py, line 295 replace the db_path with the location of your own .db file.
    db_path = "path/to/your/chatbot.db"
 
