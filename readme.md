@@ -10,7 +10,11 @@ Follow the steps below to set up and run this project:
    PASSWORD=your_password
    ```
 
-2. **Ensure Python is Installed**
+2. **Updata the Database Path**
+   In chatbot.py, line 295 replace the db_path with the location of your own .db file.
+   db_path = "path/to/your/chatbot.db"
+
+3. **Ensure Python is Installed**
    Verify that Python 3.x is installed on your system. You can check this by running:
 
    ```bash
@@ -23,7 +27,7 @@ Follow the steps below to set up and run this project:
    python3 --version
    ```
 
-3. **Create and Activate a Virtual Environment**
+4. **Create and Activate a Virtual Environment**
 
    - **On Windows**:
 
@@ -38,14 +42,14 @@ Follow the steps below to set up and run this project:
      source .venv/bin/activate
      ```
 
-4. **Install Dependencies**
+5. **Install Dependencies**
    Install all required packages using the `requirements.txt` file:
 
    ```bash
    pip install -r requirements.txt
    ```
 
-5. **Run the Application**
+6. **Run the Application**
    Start the Streamlit app:
    ```bash
    streamlit run chatbot.py
