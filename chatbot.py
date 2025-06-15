@@ -292,7 +292,7 @@ with st.sidebar:
     st.header("💬 RMIT AI Chat")
 
     # Database path input
-    db_path = "/Users/isaac/Desktop/chatbot.db"
+    db_path = "chatbot.db"
 
     if st.button("🆕 Start New Conversation"):
         if (
